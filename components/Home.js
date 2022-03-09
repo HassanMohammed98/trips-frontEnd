@@ -6,7 +6,7 @@ import Header from "./Header";
 const Home = ({ navigation }) => {
   return (
     <View style={styles.homePage}>
-      <Header />
+      <Header navigation={navigation} />
       <ScrollView style={styles.TripsList}>
         <TripList />
 
@@ -32,10 +32,4 @@ const styles = StyleSheet.create({
     backgroundColor: "pink",
   },
   Text: { fontSize: 50 },
-  reg: {
-    borderColor: "black",
-    borderWidth: 3,
-    display: "flex",
-    justifyContent: "space-evenly",
-  },
 });

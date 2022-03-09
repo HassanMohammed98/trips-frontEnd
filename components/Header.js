@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import React from "react";
 import { HStack } from "native-base";
 
-const Header = () => {
+const Header = ({ navigation }) => {
   return (
     <View style={styles.header}>
       <HStack w={"50%"} style={styles.reg}>
@@ -24,5 +24,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     // borderBottomStartRadius: 5000,
     // borderBottomEndRadius: 5000,
+  },
+  reg: {
+    borderColor: "black",
+    borderWidth: 3,
+    display: "flex",
+    justifyContent: "space-evenly",
   },
 });
