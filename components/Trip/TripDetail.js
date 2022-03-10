@@ -4,12 +4,14 @@ import TripList from "./TripList";
 
 const TripDetail = ({ route }) => {
   const { trip } = route.params;
+  console.log(trip);
 
   return (
     <View>
+      <Text>owner: {trip.user.username} </Text>
       <Text>{trip.name} </Text>
-
-      <TripList trips={trip.trips} />
+      <Text>{trip.name} </Text>
+      <Text>{trip.description} </Text>
     </View>
   );
 };
