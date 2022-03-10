@@ -4,11 +4,12 @@ import TripList from "./Trip/TripList";
 import Header from "./Header";
 import DropDown from "./buttons/DropDown";
 import authStore from "../stores/authStore";
+import { observer } from "mobx-react";
 
 const Home = ({ navigation }) => {
+  console.log(authStore.user);
   return (
     <View style={styles.homePage}>
-      <DropDown />
       <Header navigation={navigation} />
       <ScrollView style={styles.TripsList}>
         <TripList />
@@ -26,7 +27,7 @@ const Home = ({ navigation }) => {
   );
 };
 
-export default Home;
+export default observer(Home);
 
 const styles = StyleSheet.create({
   homePage: {

@@ -9,7 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 // make auth store - sign up - sign in:
 class AuthStore {
   // make empty obj :
-  //   obj = null;
+  user = null;
   constructor() {
     makeAutoObservable(this);
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
@@ -26,8 +26,7 @@ class AuthStore {
     }
   };
 
-  // sign in method:
-  //* bad request path thing error sign in 6 task?
+  // * sign in method:
   signin = async (userData) => {
     try {
       const res = await instance.post("/users/signin", userData);
@@ -45,9 +44,14 @@ class AuthStore {
   };
 
   setUser = async (token) => {
-    await AsyncStorage.setItem("myToken", token);
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    this.user = decode(token);
+    try {
+      const decodedToken = decode(token);
+      this.user = decodedToken;
+      instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await AsyncStorage.setItem("myToken", token);
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   checkForToken = async () => {
