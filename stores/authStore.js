@@ -2,14 +2,14 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 // import jwt-decode to check the token:
-import jwtDecode from "jwt-decode";
+import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //! make sure of the code ::
 // make auth store - sign up - sign in:
 class AuthStore {
   // make empty obj :
-  //   obj = null;
+  user = null;
   constructor() {
     makeAutoObservable(this);
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
@@ -26,11 +26,10 @@ class AuthStore {
     }
   };
 
-  // sign in method:
-  //* bad request path thing error sign in 6 task?
+  // * sign in method:
   signin = async (userData) => {
     try {
-      const res = await instance.post("/signin", userData);
+      const res = await instance.post("/users/signin", userData);
       this.setUser(res.data.token);
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
     } catch (error) {
@@ -38,9 +37,14 @@ class AuthStore {
     }
   };
   setUser = async (token) => {
-    await AsyncStorage.setItem("myToken", token);
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    this.user = decode(token);
+    try {
+      const decodedToken = decode(token);
+      this.user = decodedToken;
+      instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+      await AsyncStorage.setItem("myToken", token);
+    } catch (e) {
+      console.log(e);
+    }
   };
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");

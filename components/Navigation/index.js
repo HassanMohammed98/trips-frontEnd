@@ -7,6 +7,7 @@ import TripCreate from "../Trip/TripCreate";
 import HomeNotRegister from "../HomeNotRegister";
 import UserPage from "../user/UserPage";
 import UserListTrip from "../user/UserListTrip";
+import TripDetail from "../Trip/TripDetail";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -42,6 +43,11 @@ const RootNavigator = () => {
       <Screen
         name="UserPage"
         component={UserPage}
+        // options={{ headerShown: false }}
+      />
+      <Screen
+        name="TripDetail"
+        component={TripDetail}
         // options={{ headerShown: false }}
       />
     </Navigator>

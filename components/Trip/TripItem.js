@@ -8,7 +8,12 @@ const TripItem = ({ trip }) => {
 
   return (
     <Stack space={3} alignItems="center">
-      <Pressable>
+      <Pressable
+        onPress={() => {
+          //                                we send shop to shopDetail:
+          navigation.navigate("TripDetail", { trip: trip });
+        }}
+      >
         <VStack space={3} alignItems="center">
           <Center
             size={16}
