@@ -2,7 +2,7 @@ import axios from "axios";
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 // import jwt-decode to check the token:
-import jwtDecode from "jwt-decode";
+import decode from "jwt-decode";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 //! make sure of the code ::
