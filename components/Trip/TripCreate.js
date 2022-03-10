@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import tripStore from "../../stores/tripStore";
 import { TextInput } from "react-native-gesture-handler";
 import { useState } from "react";
+import authStore from "../../stores/authStore";
+import { observer } from "mobx-react";
 
 const TripCreate = ({ navigation }) => {
   const [trip, setTrip] = useState({
@@ -12,7 +14,8 @@ const TripCreate = ({ navigation }) => {
   });
 
   const handleSubmit = () => {
-    tripStore.addItemToTrip(trip);
+    console.log(authStore.user._id);
+    tripStore.createTrip(trip, authStore.user._id);
     navigation.navigate("Home");
     console.log(trip);
   };
@@ -38,7 +41,7 @@ const TripCreate = ({ navigation }) => {
   );
 };
 
-export default TripCreate;
+export default observer(TripCreate);
 
 const styles = StyleSheet.create({
   Button: {

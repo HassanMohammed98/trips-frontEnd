@@ -1,5 +1,6 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
+import authStore from "./authStore";
 
 class TripStore {
   trips = [];
@@ -9,29 +10,30 @@ class TripStore {
   }
 
   // taking the data but don't been pushed to the page???
-  addItemToTrip = async (newTrip) => {
+  // addItemToTrip = async (newTrip) => {
+  //   try {
+  //     const foundTrip = this.trips.find((trip) => trip._id === newTrip._id);
+  //     if (foundTrip) this.items.push(newTrip);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  createTrip = async (newTrip, userId) => {
     try {
-      const foundTrip = this.trips.find((trip) => trip._id === newTrip._id);
-      if (foundTrip) this.items.push(newTrip);
+      // const formData = new FormData();
+      // for (const key in newTrip) {
+      //   formData.append(key, newTrip[key]);
+      // }
+      ///:userId/trips
+      const response = await instance.post(`/trips/${userId}/trips`, newTrip);
+      this.trips.push(response.data);
     } catch (error) {
-      console.log(error);
+      console.log(
+        "🚀 ~ file: productStore.js ~ line 16 ~ ProductStore ~ createProduct= ~ error",
+        error
+      );
     }
   };
-  //   createProduct = async (newProduct) => {
-  //     try {
-  //       const formData = new FormData();
-  //       for (const key in newProduct) {
-  //         formData.append(key, newProduct[key]);
-  //       }
-  //       const response = await instance.post("/products", formData);
-  //       this.products.push(response.data);
-  //     } catch (error) {
-  //       console.log(
-  //         "🚀 ~ file: productStore.js ~ line 16 ~ ProductStore ~ createProduct= ~ error",
-  //         error
-  //       );
-  //     }
-  //   };
 
   fetchTrips = async () => {
     try {
