@@ -2,10 +2,12 @@ import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import React from "react";
 import TripList from "./Trip/TripList";
 import Header from "./Header";
+import DropDown from "./buttons/DropDown";
 
 const Home = ({ navigation }) => {
   return (
     <View style={styles.homePage}>
+      <DropDown />
       <Header navigation={navigation} />
       <ScrollView style={styles.TripsList}>
         <TripList />

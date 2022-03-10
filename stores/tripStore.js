@@ -2,12 +2,28 @@ import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 
 class TripStore {
+  trips = [];
+
   constructor() {
     makeAutoObservable(this);
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
   }
-  trips = [];
-
+  addItemToTrip = async (newTrip) => {
+    try {
+      const foundTrip = this.items.find(
+        (trip) => trip.product._id === newTrip.product._id
+      );
+      if (foundTrip) {
+        foundTrip.quantity += newTrip.quantity;
+      } else {
+        this.items.push(newTrip);
+      }
+      // const jsonValue = JSON.stringify(this.items);
+      // await AsyncStorage.setItem("cart", jsonValue);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   //   createProduct = async (newProduct) => {
   //     try {
   //       const formData = new FormData();
@@ -27,10 +43,10 @@ class TripStore {
   fetchTrips = async () => {
     try {
       const response = await instance.get("/trips");
-      this.shops = response.data;
-      //   console.log(response.data);
+      this.trips = response.data;
+      console.log("data res", response.data);
     } catch (error) {
-      console.log("ShopStore -> fetchShops -> error", error);
+      console.log("Trips -> fetchTrips -> error", error);
     }
   };
 
