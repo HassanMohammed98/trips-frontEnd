@@ -11,6 +11,7 @@ const SignUp = ({ navigation }) => {
     password: "",
     firstname: "",
     lastname: "",
+    email:"",
   });
   const handleSubmit = async () => {
     await authStore.signup(user);
@@ -25,8 +26,13 @@ const SignUp = ({ navigation }) => {
         placeholder="username"
       />
       <TextInput
+        // secureTextEntry={true}
         onChangeText={(password) => setUser({ ...user, password })}
         placeholder="password"
+      />
+      <TextInput
+        onChangeText={(email) => setUser({ ...user, email })}
+        placeholder="email"
       />
       <TextInput
         onChangeText={(firstname) => setUser({ ...user, firstname })}

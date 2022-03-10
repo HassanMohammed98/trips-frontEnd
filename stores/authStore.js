@@ -18,7 +18,7 @@ class AuthStore {
   // signup methods:
   signup = async (userData) => {
     try {
-      const res = await instance.post("/signup", userData);
+      const res = await instance.post("/users/signup", userData);
       this.setUser(res.data.token);
       console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
@@ -36,6 +36,13 @@ class AuthStore {
       console.log(error);
     }
   };
+
+  // * signout method:
+  signout = async () => {
+    this.setUser(null);
+    await AsyncStorage.removeItem("myToken");
+  };
+
   setUser = async (token) => {
     try {
       const decodedToken = decode(token);
@@ -46,6 +53,7 @@ class AuthStore {
       console.log(e);
     }
   };
+
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
     if (token) {
@@ -53,11 +61,12 @@ class AuthStore {
       if (Date.now() < decodedToken.exp) {
         this.setUser(token);
       } else {
-        // this.signout();
+        this.signout();
         console.log("you signout");
       }
     }
   };
+  
 }
 
 const authStore = new AuthStore();

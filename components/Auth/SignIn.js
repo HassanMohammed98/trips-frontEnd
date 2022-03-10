@@ -24,6 +24,7 @@ const SignIn = ({ navigation }) => {
         placeholder="username"
       />
       <TextInput
+      // secureTextEntry={true}
         onChangeText={(password) => setUser({ ...user, password })}
         placeholder="password"
       />
