@@ -15,10 +15,16 @@ class AuthStore {
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
   }
 
+  setUser = async (token) => {
+    await AsyncStorage.setItem("myToken", token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    this.user = decode(token);
+  };
+
   // signup methods:
   signup = async (userData) => {
     try {
-      const res = await instance.post("/signup", userData);
+      const res = await instance.post("/users/signup", userData);
       this.setUser(res.data.token);
       console.log("AuthStore -> signup -> res.data.token", res.data.token);
     } catch (error) {
@@ -30,18 +36,20 @@ class AuthStore {
   //* bad request path thing error sign in 6 task?
   signin = async (userData) => {
     try {
-      const res = await instance.post("/signin", userData);
+      const res = await instance.post("/users/signin", userData);
       this.setUser(res.data.token);
       console.log("AuthStore -> signin -> res.data.token", res.data.token);
     } catch (error) {
       console.log(error);
     }
   };
-  setUser = async (token) => {
-    await AsyncStorage.setItem("myToken", token);
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    this.user = decode(token);
-  };
+
+  // * signout method:
+  // signout = async () => {
+  //     this.setUser(null);
+  //     await AsyncStorage.removeItem("myToken");
+  // };
+
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
     if (token) {
