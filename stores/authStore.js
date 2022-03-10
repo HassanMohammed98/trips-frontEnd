@@ -15,12 +15,6 @@ class AuthStore {
     // this will turn our class into a mobx store and all components can observe the changes that happen in the store
   }
 
-  setUser = async (token) => {
-    await AsyncStorage.setItem("myToken", token);
-    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-    this.user = decode(token);
-  };
-
   // signup methods:
   signup = async (userData) => {
     try {
@@ -45,10 +39,16 @@ class AuthStore {
   };
 
   // * signout method:
-  // signout = async () => {
-  //     this.setUser(null);
-  //     await AsyncStorage.removeItem("myToken");
-  // };
+  signout = async () => {
+    this.setUser(null);
+    await AsyncStorage.removeItem("myToken");
+  };
+
+  setUser = async (token) => {
+    await AsyncStorage.setItem("myToken", token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    this.user = decode(token);
+  };
 
   checkForToken = async () => {
     const token = await AsyncStorage.getItem("myToken");
@@ -57,11 +57,12 @@ class AuthStore {
       if (Date.now() < decodedToken.exp) {
         this.setUser(token);
       } else {
-        // this.signout();
+        this.signout();
         console.log("you signout");
       }
     }
   };
+  
 }
 
 const authStore = new AuthStore();

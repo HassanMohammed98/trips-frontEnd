@@ -3,6 +3,7 @@ import React from "react";
 import TripList from "./Trip/TripList";
 import Header from "./Header";
 import DropDown from "./buttons/DropDown";
+import authStore from "../stores/authStore";
 
 const Home = ({ navigation }) => {
   return (
@@ -15,6 +16,10 @@ const Home = ({ navigation }) => {
         <Button
           onPress={() => navigation.navigate("TripCreate")}
           title="TripCreate"
+        />
+        <Button
+          onPress={authStore.signout}
+          title="signout"
         />
       </ScrollView>
     </View>
