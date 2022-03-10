@@ -6,20 +6,13 @@ class TripStore {
 
   constructor() {
     makeAutoObservable(this);
-    // this will turn our class into a mobx store and all components can observe the changes that happen in the store
   }
+
+  // taking the data but don't been pushed to the page???
   addItemToTrip = async (newTrip) => {
     try {
-      const foundTrip = this.items.find(
-        (trip) => trip.product._id === newTrip.product._id
-      );
-      if (foundTrip) {
-        foundTrip.quantity += newTrip.quantity;
-      } else {
-        this.items.push(newTrip);
-      }
-      // const jsonValue = JSON.stringify(this.items);
-      // await AsyncStorage.setItem("cart", jsonValue);
+      const foundTrip = this.trips.find((trip) => trip._id === newTrip._id);
+      if (foundTrip) this.items.push(newTrip);
     } catch (error) {
       console.log(error);
     }

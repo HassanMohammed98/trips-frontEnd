@@ -2,8 +2,11 @@ import { StyleSheet } from "react-native";
 import React from "react";
 import { Menu, Divider, HamburgerIcon, Button } from "native-base";
 import { Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 const DropDown = () => {
+  const navigation = useNavigation();
+
   return (
     <Menu
       trigger={(triggerProps) => {
@@ -14,11 +17,15 @@ const DropDown = () => {
         );
       }}
     >
-      <Button>EDIT</Button>
+      <Button onPress={() => navigation.navigate("UserPage")}>EDIT</Button>
       <Divider />
-      <Button>View trips</Button>
+      <Button onPress={() => navigation.navigate("UserListTrip")}>
+        View trips
+      </Button>
       <Divider />
-      <Button>Create trip</Button>
+      <Button onPress={() => navigation.navigate("TripCreate")}>
+        Create trip
+      </Button>
     </Menu>
   );
 };

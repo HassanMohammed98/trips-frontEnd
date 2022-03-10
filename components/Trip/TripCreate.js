@@ -1,20 +1,39 @@
 import { Button } from "native-base";
 import { StyleSheet, Text, View } from "react-native";
 import tripStore from "../../stores/tripStore";
-import TripList from "./TripList";
-import { useNavigation } from "@react-navigation/native";
+import { TextInput } from "react-native-gesture-handler";
+import { useState } from "react";
 
-const TripCreate = () => {
-  const handleAdd = () => {
-    tripStore.addItemToCart(trip);
+const TripCreate = ({ navigation }) => {
+  const [trip, setTrip] = useState({
+    name: "",
+    description: "",
+    image: "",
+  });
+
+  const handleSubmit = () => {
+    tripStore.addItemToTrip(trip);
+    navigation.navigate("Home");
+    console.log(trip);
   };
   return (
     <View style={styles.Text}>
-      <Button style={styles.Button} onPress={handleAdd}>
-        CREATE NEW TRIP
+      <TextInput
+        placeholder="enter you name here please"
+        onChangeText={(name) => setTrip({ ...trip, name })}
+      />
+      <TextInput
+        placeholder="enter you description here please"
+        onChangeText={(description) => setTrip({ ...trip, description })}
+      />
+      {/* need why to upload img in react native: */}
+      <TextInput
+        placeholder="upload Image"
+        onChangeText={(image) => setTrip({ ...trip, image })}
+      />
+      <Button style={styles.Button} onPress={handleSubmit}>
+        submit
       </Button>
-
-      <TripList />
     </View>
   );
 };
