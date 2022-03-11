@@ -39,14 +39,18 @@ class AuthStore {
 
   // * signout method:
   signout = async () => {
-    this.setUser(null);
+    try {
     await AsyncStorage.removeItem("myToken");
+    // this.setUser(null);
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   setUser = async (token) => {
     try {
-      const decodedToken = decode(token);
-      this.user = decodedToken;
+      // const decodedToken = decode(token);
+      // this.user = decodedToken;
       instance.defaults.headers.common.Authorization = `Bearer ${token}`;
       await AsyncStorage.setItem("myToken", token);
     } catch (e) {
@@ -58,10 +62,11 @@ class AuthStore {
     const token = await AsyncStorage.getItem("myToken");
     if (token) {
       const decodedToken = decode(token);
-      if (Date.now() < decodedToken.exp) {
+      if (Date.now() < +decodedToken.exp) {
         this.setUser(token);
       } else {
-        this.signout();
+        await AsyncStorage.removeItem("myToken");
+        this.setUser(null)
         console.log("you signout");
       }
     }

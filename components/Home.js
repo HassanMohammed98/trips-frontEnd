@@ -2,9 +2,9 @@ import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
 import React from "react";
 import TripList from "./Trip/TripList";
 import Header from "./Header";
-import DropDown from "./buttons/DropDown";
 import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
+import SignOut from "./buttons/SignOut";
 
 const Home = ({ navigation }) => {
   console.log(authStore.user);
@@ -18,10 +18,7 @@ const Home = ({ navigation }) => {
           onPress={() => navigation.navigate("TripCreate")}
           title="TripCreate"
         />
-        {/* <Button
-          onPress={authStore.signout}
-          title="signout"
-        /> */}
+        <SignOut />
       </ScrollView>
     </View>
   );
