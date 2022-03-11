@@ -18,10 +18,10 @@ const Home = ({ navigation }) => {
           onPress={() => navigation.navigate("TripCreate")}
           title="TripCreate"
         />
-        <Button
+        {/* <Button
           onPress={authStore.signout}
           title="signout"
-        />
+        /> */}
       </ScrollView>
     </View>
   );

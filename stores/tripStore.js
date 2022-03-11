@@ -56,16 +56,14 @@ class TripStore {
   //     }
   //   };
 
-  //   deleteProduct = async (productId) => {
-  //     try {
-  //       await instance.delete(`/products/${productId}`);
-  //       this.products = this.products.filter(
-  //         (product) => product._id !== productId
-  //       );
-  //     } catch (error) {
-  //       console.log("ProductStore -> deleteProduct -> error", error);
-  //     }
-  //   };
+  deleteTrip = async (tripId) => {
+    try {
+      await instance.delete(`/trips/${tripId}`);
+      this.trips = this.trips.filter((trip) => trip._id !== tripId);
+    } catch (error) {
+      console.log("tripStore -> deleteTrip -> error", error);
+    }
+  };
 }
 
 const tripStore = new TripStore();
