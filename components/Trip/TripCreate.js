@@ -14,6 +14,7 @@ const TripCreate = ({ navigation }) => {
   });
 
   const handleSubmit = () => {
+    // ! if the error get you here >> you are not sign in::
     console.log(authStore.user._id);
     tripStore.createTrip(trip, authStore.user._id);
     navigation.navigate("Home");

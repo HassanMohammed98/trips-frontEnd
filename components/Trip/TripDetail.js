@@ -1,5 +1,7 @@
 import { StyleSheet, Text, View, Image } from "react-native";
-import { Avatar } from "native-base";
+import { Avatar, Button } from "native-base";
+import tripStore from "../../stores/tripStore";
+import authStore from "../../stores/authStore";
 
 const TripDetail = ({ route }) => {
   const { trip } = route.params;
@@ -29,11 +31,17 @@ const TripDetail = ({ route }) => {
       </View>
       <Image
         source={{
-          uri: "https://wallpaperaccess.com/full/317501.jpg",
+          uri: "https://picsum.photos/200/300",
         }}
         alt="Alternate Text"
         size="xl"
       />
+      {/* // if the user = owner  he can delete */}
+      {trip.user === authStore.user._id && (
+        <Button title="Delete" onPress={() => tripStore.deleteTrip(trip._id)}>
+          Delete trip
+        </Button>
+      )}
     </View>
   );
 };
