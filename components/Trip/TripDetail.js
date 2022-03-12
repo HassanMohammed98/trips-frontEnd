@@ -7,7 +7,7 @@ import authStore from "../../stores/authStore";
 
 const TripDetail = ({ route, navigation }) => {
   const { trip } = route.params;
-
+  console.log(navigation);
   return (
     <View style={styles.container}>
       <Avatar
@@ -37,18 +37,25 @@ const TripDetail = ({ route, navigation }) => {
         alt="Alternate Text"
         size="xl"
       />
-      {trip.user === authStore.user._id && (
+
+      {/* // first check if uesr is signed in, then, if the user = owner he can delete */}
+      {authStore.user && trip.user === authStore.user._id && (
+        <Button
+          title="Delete"
+          onPress={() => {
+            tripStore.deleteTrip(trip._id, navigation, trip.name);
+          }}
+        >
+          Delete trip
+        </Button>
+      )}
+
+      {authStore.user && trip.user === authStore.user._id && (
         <Button
           title="update"
           onPress={() => navigation.navigate("EditPage", { trip: trip })}
         >
           update
-        </Button>
-      )}
-      {/* // if the user = owner  he can delete */}
-      {trip.user === authStore.user._id && (
-        <Button title="Delete" onPress={() => tripStore.deleteTrip(trip._id)}>
-          Delete trip
         </Button>
       )}
     </View>

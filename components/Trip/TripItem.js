@@ -1,49 +1,34 @@
 import { Center, Pressable, Stack, VStack, Button } from "native-base";
 import { StyleSheet, View, ImageBackground, Image, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import tripStore from "../../stores/tripStore";
 
 //! pass to detail to show the detail
 const TripItem = ({ trip }) => {
   const navigation = useNavigation();
 
   return (
-    <View>
+    <View style={styles.trip}>
       <Pressable
         onPress={() => {
           //                                we send trip to tripDetail:
           navigation.navigate("TripDetail", { trip: trip });
         }}
+        w={"95%"}
+        backgroundColor={"rgb(245, 245, 245)"}
+        //warmGray.200
+        borderRadius={10}
+        style={styles.shadow}
       >
-        <ImageBackground
-          style={[styles.flex, styles.destination, styles.shadow]}
-          imageStyle={{ borderRadius: 12 }}
-          source={{ uri: "https://picsum.photos/200/300" }}
-        >
-          <View style={[styles.column, styles.destinationInfo, styles.shadow]}>
-            {/* main name */}
-            <Text
-              style={{
-                fontSize: 20,
-                fontWeight: "500",
-                paddingBottom: 8,
-                textAlign: "center",
-              }}
-            >
-              {trip.name}
-            </Text>
-
-            <View
-            // style={[
-            //   styles.row,
-            //   { justifyContent: "space-between", alignItems: "center" },
-            // ]}
-            >
-              {/* descretion */}
-              <Text>{trip.description.split("").slice(0, 50)}...</Text>
-            </View>
+        <VStack>
+          <Image
+            source={{ uri: "https://picsum.photos/200/300" }}
+            alt="Trip image"
+            style={styles.image}
+          />
+          <View style={styles.info}>
+            <Text style={styles.heading}>Trip: {trip.name}</Text>
           </View>
-        </ImageBackground>
+        </VStack>
       </Pressable>
     </View>
   );
@@ -52,15 +37,36 @@ const TripItem = ({ trip }) => {
 export default TripItem;
 
 const styles = StyleSheet.create({
-  Image: {
-    width: 50,
-    height: 50,
+  trip: {
+    width: "100%",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 7,
+    marginBottom: 7,
+  },
+  image: {
+    width: "100%",
+    aspectRatio: 2,
+    borderTopRightRadius: 10,
+    borderTopLeftRadius: 10,
+  },
+  info: {
+    paddingTop: 15,
+    paddingLeft: 15,
+    paddingBottom: 25,
+  },
+  heading: {
+    fontSize: 20,
+    fontStyle: "italic",
+    fontWeight: "bold",
+    color: "navy",
   },
   destination: {
     // width : width - (36 * 2),
     marginHorizontal: 36,
-    paddingHorizontal: 36,
-    paddingVertical: 24,
+    // paddingHorizontal: 36,
+    // paddingVertical: 24,
     borderRadius: 12,
     overflow: "visible",
     width: "100%",
@@ -81,12 +87,12 @@ const styles = StyleSheet.create({
   shadow: {
     shadowColor: "black",
     shadowOffset: {
-      width: 0,
-      height: 6,
+      width: 1,
+      height: 7,
     },
     shadowOpacity: 0.05,
-    shadowRadius: 10,
-    elevation: 5,
+    shadowRadius: 1,
+    elevation: 10,
   },
 });
 // <Stack space={3} alignItems="center">

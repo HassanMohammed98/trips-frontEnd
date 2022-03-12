@@ -1,25 +1,20 @@
-import { StyleSheet, Text, View, ScrollView, Button } from "react-native";
+import { StyleSheet, View } from "react-native";
 import React from "react";
 import TripList from "./Trip/TripList";
 import Header from "./Header";
-import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
+import BottomTab from "./BottomTab";
+
 import SignOut from "./buttons/SignOut";
 
 const Home = ({ navigation }) => {
-  console.log(authStore.user);
   return (
-    <View style={styles.homePage}>
+    <View style={styles.container}>
       <Header navigation={navigation} />
-      <ScrollView style={styles.TripsList}>
+      <View style={styles.tripList}>
         <TripList />
-
-        <Button
-          onPress={() => navigation.navigate("TripCreate")}
-          title="TripCreate"
-        />
-        <SignOut />
-      </ScrollView>
+      </View>
+      <BottomTab navigation={navigation} />
     </View>
   );
 };
@@ -27,14 +22,15 @@ const Home = ({ navigation }) => {
 export default observer(Home);
 
 const styles = StyleSheet.create({
-  homePage: {
-    width: "100%",
-    height: "100%",
+  container: {
+    flex: 1,
+    // backgroundColor: "#fff",
+    // alignItems: "center",
+    // justifyContent: "center",
   },
-  TripsList: {
+  tripList: {
+    flex: 10,
     width: "100%",
-    height: "90%",
-    backgroundColor: "pink",
+    backgroundColor: "rgb(48, 71, 94)",
   },
-  Text: { fontSize: 50 },
 });

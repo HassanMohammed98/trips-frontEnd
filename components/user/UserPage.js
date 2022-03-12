@@ -17,7 +17,7 @@ const UserPage = ({ navigation }) => {
       {/* take the name from the user schemaha */}
       {/* <Text>{User.username}</Text> */}
       {/* view trips button navigate to user trips list */}
-      <Button onPress={navigation.navigate("UserListTrip")}>VIEW</Button>
+      <Button onPress={() => navigation.navigate("UserListTrip")}>VIEW</Button>
     </View>
   );
 };
