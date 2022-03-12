@@ -88,7 +88,9 @@ const BottomTab = ({ navigation }) => {
             name="user-edit"
             size={30}
             color="black"
-            onPress={() => navigation.navigate("UserPage")}
+            onPress={() =>
+              navigation.navigate("UserPage", { user: authStore.user._id })
+            }
           />
           <Entypo
             name="log-out"
