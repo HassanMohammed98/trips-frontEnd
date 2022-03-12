@@ -5,10 +5,10 @@ import authStore from "../../stores/authStore";
 
 const SignOut = () => {
   const navigation = useNavigation();
-
   
   return (
-    <Button onPress={authStore.signout}>SignOut</Button>
+      
+    <Button onPress={() => authStore.signout()}>SignOut</Button>
     
   );
 };

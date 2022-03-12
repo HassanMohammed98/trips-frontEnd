@@ -39,23 +39,18 @@ class AuthStore {
 
   // * signout method:
   signout = async () => {
-    try {
-    await AsyncStorage.removeItem("myToken");
-    // this.setUser(null);
-    } catch (error) {
-      console.log(error)
+    if (user === null) console.log("user is not signed in");
+    else {
+      this.user = null;
+      AsyncStorage.removeItem("token");
+      console.log("user is signed out");
     }
   };
 
   setUser = async (token) => {
-    try {
-      // const decodedToken = decode(token);
-      // this.user = decodedToken;
-      instance.defaults.headers.common.Authorization = `Bearer ${token}`;
-      await AsyncStorage.setItem("myToken", token);
-    } catch (e) {
-      console.log(e);
-    }
+    await AsyncStorage.setItem("myToken", token);
+    instance.defaults.headers.common.Authorization = `Bearer ${token}`;
+    this.user = decode(token);
   };
 
   checkForToken = async () => {
@@ -65,13 +60,11 @@ class AuthStore {
       if (Date.now() < +decodedToken.exp) {
         this.setUser(token);
       } else {
-        await AsyncStorage.removeItem("myToken");
-        this.setUser(null)
-        console.log("you signout");
+        // this.signout();
+        console.log("user is signed out", user);
       }
     }
   };
-  
 }
 
 const authStore = new AuthStore();
