@@ -4,17 +4,19 @@ import { Button } from "native-base";
 import { useState } from "react";
 import { TextInput } from "react-native-gesture-handler";
 import authStore from "../../stores/authStore";
+import { useToast } from "native-base";
 
 const SignUp = ({ navigation }) => {
+  const toast = useToast();
   const [user, setUser] = useState({
     username: "",
     password: "",
     firstname: "",
     lastname: "",
-    email:"",
+    email: "",
   });
   const handleSubmit = async () => {
-    await authStore.signup(user);
+    await authStore.signup(user, toast);
     navigation.navigate("Home");
   };
   // if (authStore.user) for auth in the futer
