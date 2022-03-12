@@ -4,15 +4,17 @@ import { TextInput } from "react-native-gesture-handler";
 import { observer } from "mobx-react";
 import { Button, HStack, VStack } from "native-base";
 import authStore from "../../stores/authStore";
+import { useToast } from "native-base";
 
 const SignIn = ({ navigation }) => {
+  const toast = useToast();
   const [user, setUser] = useState({
     username: "",
     password: "",
   });
   const handleSubmit = async () => {
     console.log("Signin", user); // give you username and password
-    await authStore.signin(user, navigation);
+    await authStore.signin(user, navigation, toast);
   };
   // if (authStore.user)
   return (

@@ -3,6 +3,7 @@ import { HStack } from "native-base";
 import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
 import React from "react";
+import { useToast } from "native-base";
 
 import {
   Ionicons,
@@ -12,6 +13,7 @@ import {
 } from "@expo/vector-icons";
 
 const BottomTab = ({ navigation }) => {
+  const toast = useToast();
   return (
     authStore.user && (
       <View style={styles.testThree}>
@@ -86,13 +88,15 @@ const BottomTab = ({ navigation }) => {
             name="user-edit"
             size={30}
             color="black"
-            onPress={() => navigation.navigate("UserPage")}
+            onPress={() =>
+              navigation.navigate("UserPage", { user: authStore.user._id })
+            }
           />
           <Entypo
             name="log-out"
             size={24}
             color="black"
-            onPress={() => authStore.signout()}
+            onPress={() => authStore.signout(toast)}
           />
         </HStack>
       </View>

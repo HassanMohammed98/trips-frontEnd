@@ -4,8 +4,10 @@ import { TextInput } from "react-native-gesture-handler";
 import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
 import authStore from "../../stores/authStore";
+import { useToast } from "native-base";
 
 const TripDetail = ({ route, navigation }) => {
+  const toast = useToast();
   const { trip } = route.params;
   console.log(navigation);
   return (
@@ -43,7 +45,7 @@ const TripDetail = ({ route, navigation }) => {
         <Button
           title="Delete"
           onPress={() => {
-            tripStore.deleteTrip(trip._id, navigation, trip.name);
+            tripStore.deleteTrip(trip._id, navigation, trip.name, toast);
           }}
         >
           Delete trip
