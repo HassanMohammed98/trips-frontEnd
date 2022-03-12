@@ -5,8 +5,6 @@ import Header from "./Header";
 import { observer } from "mobx-react";
 import BottomTab from "./BottomTab";
 
-import SignOut from "./buttons/SignOut";
-
 const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>

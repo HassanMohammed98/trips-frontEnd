@@ -12,8 +12,7 @@ const SignIn = ({ navigation }) => {
   });
   const handleSubmit = async () => {
     console.log("Signin", user); // give you username and password
-    await authStore.signin(user);
-    navigation.navigate("Home");
+    await authStore.signin(user, navigation);
   };
   // if (authStore.user)
   return (
@@ -24,7 +23,7 @@ const SignIn = ({ navigation }) => {
         placeholder="username"
       />
       <TextInput
-      // secureTextEntry={true}
+        // secureTextEntry={true}
         onChangeText={(password) => setUser({ ...user, password })}
         placeholder="password"
       />

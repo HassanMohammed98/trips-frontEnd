@@ -88,7 +88,12 @@ const BottomTab = ({ navigation }) => {
             color="black"
             onPress={() => navigation.navigate("UserPage")}
           />
-          <Entypo name="log-out" size={24} color="black" />
+          <Entypo
+            name="log-out"
+            size={24}
+            color="black"
+            onPress={() => authStore.signout()}
+          />
         </HStack>
       </View>
     )
