@@ -40,7 +40,7 @@ class AuthStore {
   // * signout method:
   signout = async () => {
     this.setUser(null);
-    await AsyncStorage.removeItem("myToken");
+    // await AsyncStorage.removeItem("myToken");
   };
 
   setUser = async (token) => {
@@ -66,7 +66,6 @@ class AuthStore {
       }
     }
   };
-  
 }
 
 const authStore = new AuthStore();

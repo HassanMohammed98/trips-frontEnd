@@ -1,6 +1,7 @@
 import { makeAutoObservable } from "mobx";
 import { instance } from "./instance";
 import authStore from "./authStore";
+import Toast from "react-native-simple-toast";
 
 class TripStore {
   trips = [];
@@ -56,10 +57,12 @@ class TripStore {
   //     }
   //   };
 
-  deleteTrip = async (tripId) => {
+  deleteTrip = async (tripId, navigation, tripName) => {
     try {
       await instance.delete(`/trips/${tripId}`);
       this.trips = this.trips.filter((trip) => trip._id !== tripId);
+      navigation.goBack();
+      Toast.show(`Trip ${tripName} has been successfully deleted`);
     } catch (error) {
       console.log("tripStore -> deleteTrip -> error", error);
     }

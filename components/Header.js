@@ -1,33 +1,65 @@
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { HStack } from "native-base";
+import { HStack, Button } from "native-base";
+import authStore from "../stores/authStore";
+import { observer } from "mobx-react";
 
 const Header = ({ navigation }) => {
+  console.log(authStore.user);
   return (
-    <View style={styles.header}>
-      <HStack w={"50%"} style={styles.reg}>
-        <Button onPress={() => navigation.navigate("SignIn")} title="SignIn" />
-        <Button onPress={() => navigation.navigate("SignUp")} title="SignUp" />
-      </HStack>
+    <View style={styles.testOne}>
+      {!authStore.user ? (
+        <HStack w={"35%"} style={styles.reg}>
+          <Button
+            size="sm"
+            variant="outline"
+            onPress={() => navigation.navigate("SignIn")}
+          >
+            SignIn
+          </Button>
+          <Button
+            size="sm"
+            variant="outline"
+            onPress={() => navigation.navigate("SignUp")}
+          >
+            SignUp
+          </Button>
+        </HStack>
+      ) : (
+        <Text
+          style={{
+            color: "black",
+            paddingRight: 10,
+            fontSize: 15,
+            fontWeight: "bold",
+            display: "flex",
+            // borderColor: "black",
+            // borderWidth: 2,
+            justifyContent: "flex-end",
+            alignItems: "flex-end",
+            textAlign: "right",
+          }}
+        >
+          Welcome,{"\n "}
+          {authStore.user.username}
+        </Text>
+      )}
     </View>
   );
 };
 
-export default Header;
+export default observer(Header);
 
 const styles = StyleSheet.create({
-  header: {
+  testOne: {
+    flex: 1,
     width: "100%",
-    height: "10%",
-    backgroundColor: "grey",
-    justifyContent: "center",
-    alignItems: "center",
-    // borderBottomStartRadius: 5000,
-    // borderBottomEndRadius: 5000,
+    backgroundColor: "white",
+    alignItems: "flex-end",
+    justifyContent: "flex-end",
+    paddingBottom: 5,
   },
   reg: {
-    borderColor: "black",
-    borderWidth: 3,
     display: "flex",
     justifyContent: "space-evenly",
   },

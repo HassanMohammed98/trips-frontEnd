@@ -3,9 +3,9 @@ import { Avatar, Button } from "native-base";
 import tripStore from "../../stores/tripStore";
 import authStore from "../../stores/authStore";
 
-const TripDetail = ({ route }) => {
+const TripDetail = ({ navigation, route }) => {
   const { trip } = route.params;
-
+  console.log(navigation);
   return (
     <View style={styles.container}>
       <Avatar
@@ -36,9 +36,14 @@ const TripDetail = ({ route }) => {
         alt="Alternate Text"
         size="xl"
       />
-      {/* // if the user = owner  he can delete */}
-      {trip.user === authStore.user._id && (
-        <Button title="Delete" onPress={() => tripStore.deleteTrip(trip._id)}>
+      {/* // first check if uesr is signed in, then, if the user = owner he can delete */}
+      {authStore.user && trip.user === authStore.user._id && (
+        <Button
+          title="Delete"
+          onPress={() => {
+            tripStore.deleteTrip(trip._id, navigation, trip.name);
+          }}
+        >
           Delete trip
         </Button>
       )}
