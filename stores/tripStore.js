@@ -45,16 +45,19 @@ class TripStore {
     }
   };
 
-  //   updateProduct = async (updatedProduct, productId) => {
-  //     try {
-  //       const res = await instance.put(`/products/${productId}`, updatedProduct);
-  //       this.products = this.products.map((product) =>
-  //         product._id === productId ? res.data : product
-  //       );
-  //     } catch (error) {
-  //       console.log("ProductStore -> updateProduct -> error", error);
-  //     }
-  //   };
+  updateTrip = async (updatedTrip, tripId) => {
+    console.log(tripId);
+    console.log(updatedTrip);
+    try {
+      const res = await instance.put(`/trips/${tripId}`, updatedTrip);
+      this.trips = this.trips.map((trip) =>
+        trip._id === tripId ? res.data : trip
+      );
+      l;
+    } catch (error) {
+      console.log("tripStore -> updateTrip -> error", error);
+    }
+  };
 
   deleteTrip = async (tripId) => {
     try {
