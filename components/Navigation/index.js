@@ -9,6 +9,7 @@ import UserPage from "../user/UserPage";
 import UserListTrip from "../user/UserListTrip";
 import TripDetail from "../Trip/TripDetail";
 import EditPage from "../user/EditPage";
+import BackButton from "../buttons/BackButton";
 
 const { Navigator, Screen } = createStackNavigator();
 
@@ -24,11 +25,41 @@ const RootNavigator = () => {
       <Screen
         name="SignIn"
         component={SignIn}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(48, 71, 94)",
+            borderBottomEndRadius: 24,
+            borderBottomLeftRadius: 24,
+            height: 80,
+          },
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            color: "rgb(225, 225, 225)",
+            fontSize: 24,
+            marginTop: -40,
+          },
+          headerLeft: () => <BackButton />,
+        }}
         // options={{ headerShown: false }}
       />
       <Screen
         name="SignUp"
         component={SignUp}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(48, 71, 94)",
+            borderBottomEndRadius: 24,
+            borderBottomLeftRadius: 24,
+            height: 80,
+          },
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            color: "rgb(225, 225, 225)",
+            fontSize: 24,
+            marginTop: -40,
+          },
+          headerLeft: () => <BackButton />,
+        }}
         // options={{ headerShown: false }}
       />
       <Screen
