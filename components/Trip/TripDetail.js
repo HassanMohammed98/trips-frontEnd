@@ -1,9 +1,11 @@
 import { StyleSheet, Text, View, Image } from "react-native";
 import { Avatar, Button } from "native-base";
+import { TextInput } from "react-native-gesture-handler";
+import { observer } from "mobx-react";
 import tripStore from "../../stores/tripStore";
 import authStore from "../../stores/authStore";
 
-const TripDetail = ({ route }) => {
+const TripDetail = ({ route, navigation }) => {
   const { trip } = route.params;
 
   return (
@@ -17,15 +19,14 @@ const TripDetail = ({ route }) => {
       >
         AK
       </Avatar>
-
       <View style={styles.inputView}>
-        <Text style={styles.TextInput}>owner: {trip.user.username} </Text>
+        <TextInput style={styles.TextInput}>
+          owner: this trip detail{trip.user.username}
+        </TextInput>
       </View>
-
       <View style={styles.inputView}>
         <Text style={styles.TextInput}>{trip.name} </Text>
       </View>
-
       <View style={styles.inputView}>
         <Text style={styles.TextInput}>{trip.description} </Text>
       </View>
@@ -36,6 +37,14 @@ const TripDetail = ({ route }) => {
         alt="Alternate Text"
         size="xl"
       />
+      {trip.user === authStore.user._id && (
+        <Button
+          title="update"
+          onPress={() => navigation.navigate("EditPage", { trip: trip })}
+        >
+          update
+        </Button>
+      )}
       {/* // if the user = owner  he can delete */}
       {trip.user === authStore.user._id && (
         <Button title="Delete" onPress={() => tripStore.deleteTrip(trip._id)}>
@@ -46,7 +55,7 @@ const TripDetail = ({ route }) => {
   );
 };
 
-export default TripDetail;
+export default observer(TripDetail);
 
 const styles = StyleSheet.create({
   container: {
