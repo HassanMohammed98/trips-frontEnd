@@ -27,8 +27,6 @@ const SignIn = ({ navigation }) => {
             display: "flex",
             justifyContent: "flex-end",
             alignItems: "center",
-            // borderColor: "black",
-            // borderWidth: 1,
           }}
         >
           <Image
@@ -36,8 +34,6 @@ const SignIn = ({ navigation }) => {
               width: 150,
               height: 150,
               zIndex: 50,
-              // borderColor: "black",
-              // borderWidth: 1,
               resizeMode: "contain",
             }}
             source={require("./img/logo.png")}
@@ -57,7 +53,6 @@ const SignIn = ({ navigation }) => {
       </VStack>
       <View style={styles.bottomContainer}>
         <VStack style={{ width: "90%" }}>
-          {/* <Text style={styles.header}> Signin</Text> */}
           <VStack space={"3"} style={{ marginBottom: 15 }}>
             <TextInput
               style={styles.textInput}
