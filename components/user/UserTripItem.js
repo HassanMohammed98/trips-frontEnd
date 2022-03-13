@@ -8,6 +8,7 @@ import { useToast, AlertDialog } from "native-base";
 const UserTripItem = ({ trip }) => {
   const navigation = useNavigation();
   const toast = useToast();
+  //   const handlePress = () => {tripStore.deleteTrip(trip._id, navigation, trip.name, toast);}
 
   return (
     <View style={styles.trip}>
