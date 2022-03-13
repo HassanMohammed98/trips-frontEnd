@@ -5,7 +5,7 @@ import authStore from "../stores/authStore";
 import { observer } from "mobx-react";
 
 const Header = ({ navigation }) => {
-  console.log(authStore.user);
+  // console.log(authStore.user);
   return (
     <View style={styles.testOne}>
       {!authStore.user ? (
@@ -33,8 +33,6 @@ const Header = ({ navigation }) => {
             fontSize: 15,
             fontWeight: "bold",
             display: "flex",
-            // borderColor: "black",
-            // borderWidth: 2,
             justifyContent: "flex-end",
             alignItems: "flex-end",
             textAlign: "right",
