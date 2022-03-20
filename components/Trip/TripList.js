@@ -18,6 +18,7 @@ export default observer(TripList);
 const styles = StyleSheet.create({
   List: {
     width: "100%",
-    // , borderColor: "black", borderWidth: 2
+    paddingTop: 15,
+    paddingBottom: 50,
   },
 });

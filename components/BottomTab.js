@@ -12,7 +12,7 @@ import {
   Entypo,
 } from "@expo/vector-icons";
 
-const BottomTab = ({ navigation }) => {
+const BottomTab = ({ navigation, route }) => {
   const toast = useToast();
   return (
     authStore.user && (
@@ -21,13 +21,27 @@ const BottomTab = ({ navigation }) => {
           style={{
             width: "40%",
             justifyContent: "space-evenly",
+            alignItems: "center",
           }}
         >
-          <Ionicons name="home" size={30} color="black" />
+          <Ionicons
+            name="home"
+            size={route.name === "Home" ? 40 : 30}
+            color={
+              route.name === "Home" ? "rgb(229, 144, 3)" : "rgb(225,225,225)"
+            }
+            onPress={() => navigation.navigate("Home")}
+          />
           <MaterialIcons
             name="luggage"
-            size={33}
-            color="black"
+            // size={33}
+            // color="rgb(225,225,225)"
+            size={route.name === "UserListTrip" ? 45 : 33}
+            color={
+              route.name === "UserListTrip"
+                ? "rgb(229, 144, 3)"
+                : "rgb(225,225,225)"
+            }
             onPress={() => navigation.navigate("UserListTrip")}
           />
         </HStack>
@@ -44,9 +58,8 @@ const BottomTab = ({ navigation }) => {
             margin: 0,
             paddingBottom: 0,
             borderRadius: 700,
-            backgroundColor: "rgba(48, 71, 94, 1)",
+            backgroundColor: "rgb(245,245,245)",
             // linearGradient: "Vertical",
-
             // backgroundGradientTop: "#333333",
             // backgroundGradientBottom: "#666666",
           }}
@@ -68,7 +81,7 @@ const BottomTab = ({ navigation }) => {
               onPress={() => navigation.navigate("TripCreate")}
               name="add-circle"
               size={75}
-              color="black"
+              color="rgb(229, 144, 3)"
               style={{
                 position: "absolute",
               }}
@@ -83,11 +96,23 @@ const BottomTab = ({ navigation }) => {
             ></View>
           </View>
         </View>
-        <HStack style={{ width: "40%", justifyContent: "space-evenly" }}>
+        <HStack
+          style={{
+            width: "40%",
+            justifyContent: "space-evenly",
+            alignItems: "center",
+          }}
+        >
           <FontAwesome5
             name="user-edit"
-            size={30}
-            color="black"
+            // size={30}
+            // color="rgb(225,225,225)"
+            size={route.name === "UserPage" ? 40 : 30}
+            color={
+              route.name === "UserPage"
+                ? "rgb(229, 144, 3)"
+                : "rgb(225,225,225)"
+            }
             onPress={() =>
               navigation.navigate("UserPage", { user: authStore.user._id })
             }
@@ -95,7 +120,7 @@ const BottomTab = ({ navigation }) => {
           <Entypo
             name="log-out"
             size={24}
-            color="black"
+            color="rgb(225,225,225)"
             onPress={() => authStore.signout(toast)}
           />
         </HStack>
@@ -110,7 +135,7 @@ const styles = StyleSheet.create({
   testThree: {
     flex: 1,
     width: "100%",
-    backgroundColor: "white",
+    backgroundColor: "rgb(48, 71, 94)",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",

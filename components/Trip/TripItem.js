@@ -23,7 +23,7 @@ const TripItem = ({ trip }) => {
           <Image
             source={{ uri: "https://picsum.photos/200/300" }}
             alt="Trip image"
-            style={styles.image}
+            style={[styles.image, { resizeMode: "cover" }]}
           />
           <View style={styles.info}>
             <Text style={styles.heading}>Trip: {trip.name}</Text>
@@ -42,8 +42,8 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 7,
-    marginBottom: 7,
+    // marginTop: 1,
+    marginBottom: 13,
   },
   image: {
     width: "100%",
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.05,
     shadowRadius: 1,
-    elevation: 10,
+    elevation: 7,
   },
 });
 // <Stack space={3} alignItems="center">

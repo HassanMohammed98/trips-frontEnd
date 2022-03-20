@@ -10,18 +10,38 @@ import UserListTrip from "../user/UserListTrip";
 import TripDetail from "../Trip/TripDetail";
 import EditPage from "../user/EditPage";
 import BackButton from "../buttons/BackButton";
+import Header from "../Header";
+import HomeLogo from "../HomeLogo";
 
 const { Navigator, Screen } = createStackNavigator();
 
 const RootNavigator = () => {
   return (
     <Navigator initialRouteName="Home">
-      <Screen name="Home" component={Home} options={{ headerShown: false }} />
-      {/* <Screen
-        name="HomeNotRegister"
-        component={HomeNotRegister}
-        // options={{ headerShown: false }}
-      /> */}
+      <Screen
+        name="Home"
+        component={Home}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(48, 71, 94)",
+            borderBottomEndRadius: 24,
+            borderBottomLeftRadius: 24,
+            height: 80,
+          },
+          title: false,
+          headerRight: () => <Header />,
+          headerLeft: () => <HomeLogo />,
+
+          // headerTitleAlign: "center",
+          // headerTitleStyle: {
+          //   color: "rgb(225, 225, 225)",
+          //   fontSize: 24,
+          //   marginTop: -40,
+          // },
+          // headerLeft: () => <BackButton />,
+        }}
+      />
+
       <Screen
         name="SignIn"
         component={SignIn}
@@ -60,12 +80,25 @@ const RootNavigator = () => {
           },
           headerLeft: () => <BackButton />,
         }}
-        // options={{ headerShown: false }}
       />
       <Screen
         name="TripCreate"
         component={TripCreate}
-        // options={{ headerShown: false }}
+        options={{
+          headerStyle: {
+            backgroundColor: "rgb(48, 71, 94)",
+            borderBottomEndRadius: 24,
+            borderBottomLeftRadius: 24,
+            height: 80,
+          },
+          headerTitleAlign: "center",
+          headerTitleStyle: {
+            color: "rgb(225, 225, 225)",
+            fontSize: 24,
+            marginTop: -40,
+          },
+          headerLeft: () => <BackButton />,
+        }}
       />
       <Screen
         name="UserListTrip"

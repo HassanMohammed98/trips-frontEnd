@@ -19,14 +19,26 @@ class TripStore {
   //     console.log(error);
   //   }
   // };
-  createTrip = async (newTrip, userId) => {
+  createTrip = async (trip, calendar) => {
+    const newTrip = {
+      ...trip,
+      startdate: calendar.selectedStartDate.toString(),
+      enddate: calendar.selectedEndDate.toString(),
+    };
+    console.log(newTrip);
+    // newTrip
     try {
-      // const formData = new FormData();
-      // for (const key in newTrip) {
-      //   formData.append(key, newTrip[key]);
-      // }
-      ///:userId/trips
-      const response = await instance.post(`/trips/${userId}/trips`, newTrip);
+      const formData = new FormData();
+      for (const key in newTrip) {
+        formData.append(key, newTrip[key]);
+      }
+      const response = await instance.post("/trips", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        transformRequest: (data, headers) => {
+          return formData;
+        },
+      });
+      console.log(response);
       this.trips.push(response.data);
     } catch (error) {
       console.log(
@@ -50,7 +62,7 @@ class TripStore {
     console.log(tripId);
     console.log(updatedTrip);
     try {
-      const res = await instance.put(`/trips/${tripId}`, updatedTrip);
+      const res = await instance.put("/trips", updatedTrip);
       this.trips = this.trips.map((trip) =>
         trip._id === tripId ? res.data : trip
       );
